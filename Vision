@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Vision — AMAN</title>
+<meta name="description" content="Why Matthew Brown founded the Ave Maria Alumni Network."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#080808;
+  --navy:#0F2044;
+  --green:#1A6645;
+  --green-light:#22885A;
+  --white:#FFFFFF;
+  --off-white:#F7F6F3;
+  --gray-100:#EFEFED;
+  --gray-400:#AAAAAA;
+  --gray-500:#8A8A86;
+  --gray-700:#4A4A48;
+  --border-dark:rgba(255,255,255,0.08);
+  --border-light:rgba(0,0,0,0.08);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:64px;
+  background:rgba(8,8,8,0.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dark);
+}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.nav-mark{width:32px;height:32px;background:var(--green);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;color:#fff;}
+.nav-wordmark{font-size:13px;font-weight:500;letter-spacing:0.06em;color:rgba(255,255,255,0.9);}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:#fff;}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s;}
+.nav-back:hover{color:#fff;}
+.nav-cta{background:var(--green);color:#fff;padding:9px 22px;border-radius:5px;font-size:13px;font-weight:500;text-decoration:none;transition:background 0.2s;}
+.nav-cta:hover{background:var(--green-light);}
+
+/* HERO */
+.vision-hero{
+  min-height:70vh;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:120px 3rem 5rem;
+  max-width:1160px;margin:0 auto;
+  position:relative;
+}
+.hero-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;}
+.hero-bg .grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(26,102,69,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(26,102,69,0.05) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-bg .orb{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(26,102,69,0.08) 0%,transparent 65%);top:-200px;right:-200px;}
+.vision-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;}
+.vision-eyebrow::before{content:'';width:24px;height:1px;background:var(--green);}
+.vision-h1{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:#fff;margin-bottom:2rem;}
+.vision-h1 em{font-style:italic;font-weight:400;color:rgba(255,255,255,0.45);}
+.vision-byline{display:flex;align-items:center;gap:1rem;}
+.byline-avatar{width:44px;height:44px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;color:#fff;flex-shrink:0;}
+.byline-text{}
+.byline-name{font-size:14px;font-weight:500;color:#fff;}
+.byline-title{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;}
+
+/* CONTENT */
+.vision-body{background:var(--white);color:var(--black);}
+.vision-inner{max-width:740px;margin:0 auto;padding:6rem 2.5rem 8rem;}
+
+.vision-lead{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.3rem,2.5vw,1.7rem);
+  font-weight:400;
+  line-height:1.55;
+  color:var(--black);
+  margin-bottom:3rem;
+  padding-bottom:3rem;
+  border-bottom:1px solid var(--border-light);
+}
+
+.vision-prose{display:flex;flex-direction:column;gap:1.75rem;}
+.vision-prose p{font-size:1.05rem;line-height:1.85;color:var(--gray-700);font-weight:300;}
+.vision-prose p strong{font-weight:600;color:var(--black);}
+
+.vision-pull{
+  margin:2.5rem 0;
+  padding:2rem 2.5rem;
+  border-left:3px solid var(--green);
+  background:var(--off-white);
+  border-radius:0 8px 8px 0;
+}
+.vision-pull p{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-style:italic;
+  color:var(--black);line-height:1.6;
+  font-weight:400;
+}
+
+.vision-section-break{
+  display:flex;align-items:center;gap:1rem;
+  margin:2.5rem 0 1.5rem;
+}
+.vsb-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:rgba(26,102,69,0.15);line-height:1;}
+.vsb-title{font-size:18px;font-weight:600;color:var(--black);}
+
+.vision-sign{
+  margin-top:4rem;
+  padding-top:3rem;
+  border-top:1px solid var(--border-light);
+  display:flex;flex-direction:column;gap:1rem;
+}
+.sign-closing{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--gray-500);}
+.sign-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--black);letter-spacing:-0.01em;}
+.sign-title{font-size:13px;color:var(--gray-500);letter-spacing:0.06em;text-transform:uppercase;margin-top:-0.25rem;}
+
+/* CTA BAND */
+.vision-cta{background:var(--black);padding:6rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.vcta-ring{position:absolute;border-radius:50%;border:1px solid rgba(26,102,69,0.08);top:50%;left:50%;transform:translate(-50%,-50%);}
+.vcta-ring1{width:400px;height:400px;}
+.vcta-ring2{width:650px;height:650px;}
+.vcta-orb{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(26,102,69,0.08) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}
+.vcta-inner{position:relative;z-index:1;max-width:560px;margin:0 auto;}
+.vcta-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;}
+.vcta-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;}
+.vcta-sub{font-size:1rem;color:rgba(255,255,255,0.4);line-height:1.8;margin-bottom:2.5rem;font-weight:300;}
+.vcta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:14px 34px;border-radius:6px;font-size:14px;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+.vcta-btn:hover{background:var(--green-light);transform:translateY(-2px);}
+
+footer{background:var(--black);border-top:1px solid var(--border-dark);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;}
+.footer-left{display:flex;align-items:center;gap:12px;}
+.footer-mark{width:28px;height:28px;background:var(--green);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;color:#fff;}
+.footer-name{font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);}
+.footer-right{font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:0.04em;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:700px){
+  nav{padding:0 1.25rem;}
+  .nav-links{display:none;}
+  .vision-hero{padding:100px 1.5rem 4rem;}
+  .vision-inner{padding:4rem 1.5rem 5rem;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-mark">AM</div>
+    <span class="nav-wordmark">Ave Maria Alumni Network</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#how">How it works</a></li>
+    <li><a href="index.html#members">Members</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" class="nav-cta">Join now</a></li>
+  </ul>
+</nav>
+
+<div class="hero-bg">
+  <div class="grid"></div>
+  <div class="orb"></div>
+</div>
+
+<div style="max-width:1160px;margin:0 auto;">
+  <section class="vision-hero">
+    <div class="vision-eyebrow">From the founder</div>
+    <h1 class="vision-h1">The<br><em>Vision</em></h1>
+    <div class="vision-byline">
+      <div class="byline-avatar">MB</div>
+      <div class="byline-text">
+        <div class="byline-name">Matthew Brown</div>
+        <div class="byline-title">Founder, AMAN · Class of 2026</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="vision-body">
+  <div class="vision-inner">
+
+    <p class="vision-lead reveal">
+      At most universities, alumni relations are a well-oiled machine. At Ave Maria — still young, still growing — that infrastructure is still finding its footing. I decided to stop waiting for someone else to build it.
+    </p>
+
+    <div class="vision-prose">
+
+      <p class="reveal">I ask students a simple question: <strong>"How many alumni do you actually know?"</strong> Not friends. Not family. Alumni you know through work, through industry, through professional networking.</p>
+
+      <p class="reveal">The answer is almost always the same — nobody, or maybe fewer than five. I have yet to meet a single student who knows ten or more alumni they didn't directly attend school with. That number should be much higher. At a university built around community and formation, it should be much, much higher.</p>
+
+      <p class="reveal">That question is what led to this project.</p>
+
+      <div class="vision-section-break reveal">
+        <div class="vsb-num">01</div>
+        <div class="vsb-title">A real referral network</div>
+      </div>
+
+      <p class="reveal">The first reason I built AMAN is to create a true alumni referral network — a professional connection hub where graduates across every industry can actively help each other grow.</p>
+
+      <div class="vision-pull reveal">
+        <p>"If I work in commercial insurance and another alumnus works in commercial real estate, and we both live in the same county — why wouldn't we know each other? Why wouldn't we be sending referrals back and forth?"</p>
+      </div>
+
+      <p class="reveal">Instead of giving business to strangers and hoping they follow through, we should be able to open a trusted network and say: <strong>I'd rather give this opportunity to another Ave alumnus.</strong> Maybe it's someone from your graduating class. Maybe it's someone who was here years before you and is now thriving in their field.</p>
+
+      <p class="reveal">The goal is simple: we increase our personal networks by helping each other increase our personal net worth. That creates stronger alumni relationships, stronger business opportunities, and the foundation for a truly dominant Ave-led professional network — not just in Florida, but anywhere.</p>
+
+      <div class="vision-section-break reveal">
+        <div class="vsb-num">02</div>
+        <div class="vsb-title">A pipeline for students</div>
+      </div>
+
+      <p class="reveal">The second reason is internships. In today's job market, internships are not optional. They are necessary. And they are often very difficult to find — especially when you don't know where to start.</p>
+
+      <p class="reveal">Imagine a sophomore who knows exactly what industry he wants to enter, but has no connections. Instead of guessing, he opens his laptop and gains access to a database of alumni working in that exact field — people who were once in the exact same position he's in now.</p>
+
+      <p class="reveal">That student could reach out, ask questions, get advice, receive referrals, and maybe even land a life-changing internship because someone chose to help. That matters.</p>
+
+      <div class="vision-pull reveal">
+        <p>"This is not just about making people richer or expanding networks for the sake of business. This is about building something lasting. Something that helps the student who is unsure where to start."</p>
+      </div>
+
+      <p class="reveal">The vision is one of the strongest and most tight-knit alumni networks of any university in the country — built on trust, shared values, and a genuine desire to see each other succeed.</p>
+
+      <p class="reveal">That is what AMAN is for.</p>
+
+      <div class="vision-sign reveal">
+        <div class="sign-closing">Cheers to the future,</div>
+        <div class="sign-name">Matthew Brown</div>
+        <div class="sign-title">Founder · Ave Maria Alumni Network · Class of 2026</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="vision-cta">
+  <div class="vcta-orb"></div>
+  <div class="vcta-ring vcta-ring1"></div>
+  <div class="vcta-ring vcta-ring2"></div>
+  <div class="vcta-inner reveal">
+    <p class="vcta-kicker">Be part of it</p>
+    <h2 class="vcta-h2">The network starts with you.</h2>
+    <p class="vcta-sub">Every great network begins with a handful of people who believed before anyone else did. Be one of them.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" class="vcta-btn">Become a founding member →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-mark">AM</div>
+    <span class="footer-name">Ave Maria Alumni Network</span>
+  </div>
+  <span class="footer-right">Class of 2026 · Student-founded · Ave Maria, Florida</span>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
