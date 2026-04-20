@@ -719,6 +719,7 @@ footer{
 
 <!-- ALUMNI MAP -->
 <section style="background:var(--off-white);padding:7rem 0;" id="map">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <div style="max-width:1160px;margin:0 auto;padding:0 2.5rem;">
     <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem;">
       <div>
@@ -728,76 +729,13 @@ footer{
       <p style="font-size:13px;color:var(--gray-500);max-width:280px;line-height:1.7;text-align:right;">Every dot is a fellow Ave Maria graduate. The map updates as members join.</p>
     </div>
     <div class="reveal" style="background:var(--white);border-radius:16px;border:1px solid var(--border-light);overflow:hidden;position:relative;">
-      <div id="map-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--white);z-index:10;border-radius:16px;">
+      <div id="map-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--white);z-index:999;border-radius:16px;">
         <div style="text-align:center;">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--green);margin:0 auto 12px;animation:mapPulse 1.5s ease-in-out infinite;"></div>
           <p style="font-size:12px;color:var(--gray-400);letter-spacing:0.08em;text-transform:uppercase;">Loading map</p>
         </div>
       </div>
-      <svg id="us-map" viewBox="0 0 960 600" style="width:100%;display:block;background:var(--white);" xmlns="http://www.w3.org/2000/svg">
-        <!-- US State Paths (simplified) -->
-        <!-- Continental US outline approximation -->
-        <g id="states" fill="#F0EEE8" stroke="#fff" stroke-width="1.5">
-          <!-- Maine --><path d="M856 57 L868 52 L878 68 L872 82 L858 78 Z"/>
-          <!-- Vermont --><path d="M836 65 L848 62 L852 75 L840 80 Z"/>
-          <!-- New Hampshire --><path d="M850 62 L858 58 L862 72 L854 76 Z"/>
-          <!-- Massachusetts --><path d="M830 78 L856 74 L858 86 L836 88 Z"/>
-          <!-- Rhode Island --><path d="M856 82 L863 80 L865 88 L858 90 Z"/>
-          <!-- Connecticut --><path d="M838 86 L856 83 L856 94 L838 95 Z"/>
-          <!-- New York --><path d="M790 60 L840 56 L842 82 L830 90 L806 92 L798 78 Z"/>
-          <!-- New Jersey --><path d="M820 92 L832 90 L836 108 L824 110 Z"/>
-          <!-- Pennsylvania --><path d="M790 80 L834 76 L836 98 L792 102 Z"/>
-          <!-- Delaware --><path d="M832 102 L840 100 L842 112 L834 112 Z"/>
-          <!-- Maryland --><path d="M792 104 L832 100 L834 114 L810 118 L796 112 Z"/>
-          <!-- Virginia --><path d="M780 114 L830 110 L834 128 L810 136 L780 130 Z"/>
-          <!-- West Virginia --><path d="M780 100 L806 98 L810 118 L784 118 Z"/>
-          <!-- North Carolina --><path d="M776 132 L830 128 L834 146 L778 148 Z"/>
-          <!-- South Carolina --><path d="M790 148 L826 144 L828 164 L792 164 Z"/>
-          <!-- Georgia --><path d="M778 160 L826 156 L828 192 L780 192 Z"/>
-          <!-- Florida --><path d="M780 190 L826 188 L832 210 L820 240 L800 260 L784 240 L778 214 Z"/>
-          <!-- Alabama --><path d="M750 162 L782 160 L782 196 L752 196 Z"/>
-          <!-- Mississippi --><path d="M718 162 L752 160 L754 200 L720 200 Z"/>
-          <!-- Tennessee --><path d="M714 138 L780 134 L782 158 L716 160 Z"/>
-          <!-- Kentucky --><path d="M714 116 L782 112 L782 136 L716 140 Z"/>
-          <!-- Ohio --><path d="M754 92 L800 88 L802 118 L756 120 Z"/>
-          <!-- Indiana --><path d="M724 96 L756 92 L758 122 L726 124 Z"/>
-          <!-- Illinois --><path d="M690 98 L726 94 L728 140 L692 142 Z"/>
-          <!-- Michigan UP --><path d="M706 58 L752 54 L754 76 L708 78 Z"/>
-          <!-- Michigan LP --><path d="M734 76 L762 72 L764 100 L736 102 Z"/>
-          <!-- Wisconsin --><path d="M672 62 L710 58 L712 96 L674 98 Z"/>
-          <!-- Minnesota --><path d="M618 38 L672 34 L674 82 L620 84 Z"/>
-          <!-- Iowa --><path d="M626 96 L690 92 L692 124 L628 126 Z"/>
-          <!-- Missouri --><path d="M626 124 L714 120 L716 158 L628 160 Z"/>
-          <!-- Arkansas --><path d="M626 160 L716 156 L718 192 L628 192 Z"/>
-          <!-- Louisiana --><path d="M628 192 L718 188 L722 216 L700 222 L680 218 L660 224 L640 216 L630 208 Z"/>
-          <!-- North Dakota --><path d="M550 34 L618 30 L620 66 L552 68 Z"/>
-          <!-- South Dakota --><path d="M550 66 L620 62 L622 100 L552 102 Z"/>
-          <!-- Nebraska --><path d="M548 100 L626 96 L628 128 L550 130 Z"/>
-          <!-- Kansas --><path d="M546 128 L626 124 L628 162 L548 164 Z"/>
-          <!-- Oklahoma --><path d="M544 162 L626 158 L630 196 L546 196 Z"/>
-          <!-- Texas --><path d="M480 192 L628 186 L634 260 L580 290 L520 286 L480 260 Z"/>
-          <!-- Montana --><path d="M430 28 L552 22 L554 80 L432 84 Z"/>
-          <!-- Wyoming --><path d="M432 82 L552 78 L554 122 L434 126 Z"/>
-          <!-- Colorado --><path d="M432 122 L550 118 L552 162 L434 166 Z"/>
-          <!-- New Mexico --><path d="M430 164 L550 160 L552 210 L432 212 Z"/>
-          <!-- Idaho --><path d="M364 50 L432 44 L434 108 L390 124 L366 108 Z"/>
-          <!-- Utah --><path d="M392 122 L434 118 L436 172 L394 174 Z"/>
-          <!-- Arizona --><path d="M390 170 L434 166 L436 216 L392 218 Z"/>
-          <!-- Nevada --><path d="M320 88 L368 72 L392 108 L394 174 L322 174 Z"/>
-          <!-- Washington --><path d="M302 28 L368 22 L370 68 L304 72 Z"/>
-          <!-- Oregon --><path d="M302 70 L368 64 L370 110 L304 116 Z"/>
-          <!-- California --><path d="M286 108 L322 84 L326 176 L290 196 L282 168 Z"/>
-          <!-- Alaska (inset) --><path d="M80 480 L200 470 L210 540 L140 560 L80 540 Z"/>
-          <!-- Hawaii (inset) --><path d="M260 510 L272 508 L274 518 L262 520 Z M276 514 L290 510 L294 522 L278 524 Z M294 516 L306 514 L308 524 L296 526 Z"/>
-        </g>
-        <!-- Member dots will be injected here -->
-        <g id="member-dots"></g>
-        <!-- Map legend -->
-        <g transform="translate(30,560)">
-          <circle cx="0" cy="0" r="6" fill="#1A6645" opacity="0.8"/>
-          <text x="14" y="4" font-family="DM Sans,sans-serif" font-size="11" fill="#8A8A86">AMAN member</text>
-        </g>
-      </svg>
+      <div id="alumni-map" style="height:480px;width:100%;border-radius:16px;"></div>
     </div>
     <div style="display:flex;justify-content:center;margin-top:1.5rem;">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" style="font-size:13px;color:var(--green);font-weight:500;text-decoration:none;">Add your pin to the map →</a>
@@ -807,9 +745,10 @@ footer{
 
 <style>
 @keyframes mapPulse{0%,100%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.5);opacity:1;}}
-@keyframes dotAppear{from{opacity:0;transform:scale(0);}to{opacity:0.85;transform:scale(1);}}
-.map-dot{animation:dotAppear 0.4s ease both;}
-.map-dot:hover{opacity:1 !important;cursor:default;}
+.leaflet-container{background:#F7F6F3 !important;font-family:'DM Sans',sans-serif;}
+.leaflet-tile-pane{filter:saturate(0.15) brightness(1.05);}
+.leaflet-control-attribution{display:none !important;}
+.leaflet-control-zoom a{border-color:rgba(0,0,0,0.1) !important;color:var(--navy) !important;}
 </style>
 
 <!-- PILLARS -->
@@ -1035,84 +974,192 @@ const STATE_COORDS = {
   "WI":[693,79],"WY":[493,104]
 };
 
-// Placeholder member locations — replace with live Google Sheets data
-const MEMBERS = [
-  {state:"FL"},{state:"NY"},{state:"IL"},{state:"TX"},{state:"CA"},
-  {state:"VA"},{state:"PA"},{state:"OH"},{state:"GA"},{state:"FL"},
-];
+// ===== LIVE GOOGLE SHEETS CONNECTION =====
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRb39V8bQ_thzf8qnVfi5Tb-P0ECIYdGMngXSnjTekhxKopaCnXdK8xEizrNj-_x8EgjlL9cC0rnXq6/pub?gid=1132513376&single=true&output=csv";
 
-function renderMap() {
-  const dotsGroup = document.getElementById('member-dots');
-  if (!dotsGroup) return;
-  
-  // Count by state
+// Column indexes (0-based). Row 1 = headers, data starts row 4 (index 3)
+const STATE_COL = 9;  // Column J
+const CITY_COL  = 8;  // Column I
+const NAME_COL  = 0;  // Column A (adjust if different)
+
+function parseCSV(text) {
+  const rows = [];
+  const lines = text.split("\n");
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    // Simple CSV parse handling quoted fields
+    const cols = [];
+    let cur = "", inQ = false;
+    for (let c = 0; c < line.length; c++) {
+      const ch = line[c];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ""; }
+      else { cur += ch; }
+    }
+    cols.push(cur.trim());
+    rows.push(cols);
+  }
+  return rows;
+}
+
+async function fetchMembers() {
+  try {
+    // Use CORS proxy to fetch Google Sheets CSV
+    const proxy = "https://corsproxy.io/?";
+    const res = await fetch(proxy + encodeURIComponent(SHEET_CSV_URL));
+    const text = await res.text();
+    const rows = parseCSV(text);
+    // Data starts at row index 3 (row 4 in sheet)
+    const members = [];
+    for (let i = 3; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || row.length < 10) continue;
+      const state = row[STATE_COL] ? row[STATE_COL].trim().toUpperCase() : "";
+      const city  = row[CITY_COL]  ? row[CITY_COL].trim()  : "";
+      if (state && state.length === 2) {
+        members.push({ state, city });
+      }
+    }
+    return members;
+  } catch(e) {
+    console.warn("Could not load sheet data, using placeholders.", e);
+    return [{state:"FL"},{state:"NY"},{state:"IL"},{state:"TX"},{state:"CA"}];
+  }
+}
+
+// Update member count display from sheet
+async function updateMemberCount() {
+  try {
+    const proxy = "https://corsproxy.io/?";
+    const res = await fetch(proxy + encodeURIComponent(SHEET_CSV_URL));
+    const text = await res.text();
+    const rows = parseCSV(text);
+    // Count non-empty rows starting from row 4 (index 3)
+    let count = 0;
+    for (let i = 3; i < rows.length; i++) {
+      const row = rows[i];
+      if (row && row[0] && row[0].trim() !== "") count++;
+    }
+    if (count > 0) {
+      const els = document.querySelectorAll("#hero-count, #count-big, #member-count");
+      els.forEach(el => { if(el) el.textContent = count; });
+    }
+  } catch(e) { /* keep placeholder */ }
+}
+
+async function renderMap() {
+  const MEMBERS = await fetchMembers();
+  await updateMemberCount();
+
+  // Load Leaflet
+  await new Promise((resolve) => {
+    if (window.L) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+
+  const mapEl = document.getElementById('alumni-map');
+  if (!mapEl || !window.L) return;
+
+  // Init map centered on continental US
+  const map = L.map('alumni-map', {
+    center: [38.5, -96],
+    zoom: 4,
+    zoomControl: true,
+    scrollWheelZoom: false,
+    attributionControl: false,
+    minZoom: 3,
+    maxZoom: 8
+  });
+
+  // Clean minimal tile layer
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // State center coordinates [lat, lng]
+  const STATE_LATLON = {
+    "AL":[32.7,-86.7],"AK":[64.2,-153.4],"AZ":[34.3,-111.1],"AR":[34.8,-92.2],
+    "CA":[36.8,-119.4],"CO":[39.1,-105.4],"CT":[41.6,-72.7],"DE":[39.0,-75.5],
+    "FL":[27.8,-81.6],"GA":[32.2,-82.9],"HI":[20.3,-156.4],"ID":[44.2,-114.5],
+    "IL":[40.3,-89.0],"IN":[40.3,-86.1],"IA":[41.9,-93.3],"KS":[38.5,-98.4],
+    "KY":[37.5,-85.3],"LA":[31.2,-91.8],"ME":[45.4,-69.0],"MD":[39.1,-76.8],
+    "MA":[42.2,-71.5],"MI":[44.3,-85.6],"MN":[46.4,-93.1],"MS":[32.3,-89.4],
+    "MO":[38.5,-92.3],"MT":[46.9,-110.5],"NE":[41.5,-99.9],"NV":[38.5,-117.1],
+    "NH":[43.7,-71.6],"NJ":[40.1,-74.5],"NM":[34.5,-106.2],"NY":[42.9,-75.5],
+    "NC":[35.6,-79.4],"ND":[47.5,-100.5],"OH":[40.4,-82.8],"OK":[35.6,-96.9],
+    "OR":[44.1,-120.5],"PA":[40.6,-77.2],"RI":[41.7,-71.5],"SC":[33.9,-80.9],
+    "SD":[44.3,-99.4],"TN":[35.8,-86.3],"TX":[31.1,-97.6],"UT":[39.4,-111.1],
+    "VT":[44.1,-72.7],"VA":[37.8,-78.2],"WA":[47.4,-121.5],"WV":[38.6,-80.6],
+    "WI":[44.3,-89.6],"WY":[42.8,-107.6]
+  };
+
+  const fixCoords = (coords) => coords || null;
+
+  // Custom dot icon
+  const dotIcon = L.divIcon({
+    className: '',
+    html: `<div style="
+      width:16px;height:16px;border-radius:50%;
+      background:#1A6645;opacity:0.85;
+      border:2.5px solid rgba(255,255,255,0.9);
+      box-shadow:0 2px 8px rgba(26,102,69,0.4);
+    "></div>`,
+    iconSize:[16,16],
+    iconAnchor:[8,8]
+  });
+
+  // Count by state and place dots
   const stateCounts = {};
   MEMBERS.forEach(m => {
-    stateCounts[m.state] = (stateCounts[m.state] || 0) + 1;
+    if (m.state) stateCounts[m.state] = (stateCounts[m.state] || 0) + 1;
   });
 
-  // Color states with members
-  document.querySelectorAll('#states path').forEach(path => {
-    // No fill changes — keep clean
-  });
-
-  // Add dots
-  let delay = 0;
   Object.entries(stateCounts).forEach(([state, count]) => {
-    const coords = STATE_COORDS[state];
+    const coords = fixCoords(STATE_LATLON[state]);
     if (!coords) return;
-    
-    // Pulse ring
-    const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    ring.setAttribute('cx', coords[0]);
-    ring.setAttribute('cy', coords[1]);
-    ring.setAttribute('r', '12');
-    ring.setAttribute('fill','none');
-    ring.setAttribute('stroke','#1A6645');
-    ring.setAttribute('stroke-width','1');
-    ring.setAttribute('opacity','0.25');
-    ring.style.animation = `dotAppear 0.4s ${delay}ms ease both`;
-    dotsGroup.appendChild(ring);
 
-    // Main dot
-    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx', coords[0]);
-    dot.setAttribute('cy', coords[1]);
-    dot.setAttribute('r', count > 1 ? Math.min(8 + count, 14) : 6);
-    dot.setAttribute('fill','#1A6645');
-    dot.setAttribute('opacity','0.85');
-    dot.setAttribute('class','map-dot');
-    dot.style.animationDelay = delay + 'ms';
-    dotsGroup.appendChild(dot);
+    // Scale icon with member count
+    const size = Math.min(10 + count * 3, 22);
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width:${size}px;height:${size}px;border-radius:50%;
+        background:#1A6645;opacity:0.85;
+        border:2.5px solid rgba(255,255,255,0.95);
+        box-shadow:0 2px 12px rgba(26,102,69,0.45);
+        transition:transform 0.2s;
+      "></div>`,
+      iconSize:[size,size],
+      iconAnchor:[size/2,size/2]
+    });
 
-    // Inner dot
-    const inner = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    inner.setAttribute('cx', coords[0]);
-    inner.setAttribute('cy', coords[1]);
-    inner.setAttribute('r','2.5');
-    inner.setAttribute('fill','#fff');
-    inner.setAttribute('opacity','0.7');
-    inner.style.animation = `dotAppear 0.4s ${delay + 100}ms ease both`;
-    dotsGroup.appendChild(inner);
-
-    delay += 80;
+    L.marker(coords, {icon}).addTo(map);
   });
+
 
   // Hide loader
   setTimeout(() => {
     const loader = document.getElementById('map-loading');
     if (loader) loader.style.display = 'none';
-  }, 600);
+    // Force map resize after reveal
+    if (window._amanMap) window._amanMap.invalidateSize();
+  }, 800);
 }
 
 // Run after page loads
-window.addEventListener('load', () => setTimeout(renderMap, 400));
+window.addEventListener('load', () => {
+  setTimeout(renderMap, 600);
+  updateMemberCount();
+});
 
 
-// Member count
-const MEMBER_COUNT = 0;
-const display = MEMBER_COUNT === 0 ? '—' : MEMBER_COUNT;
-document.getElementById('hero-count').textContent = display;
+// Member count is now pulled live from Google Sheets above
 </script>
 </body>
 </html>
