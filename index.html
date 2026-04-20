@@ -526,6 +526,7 @@ footer{
     <li><a href="#members">Members</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="vision.html">The Vision</a></li>
     <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" class="nav-cta">Join now</a></li>
   </ul>
 </nav>
@@ -714,6 +715,102 @@ footer{
     <p style="margin-top:1.5rem;font-size:12px;color:var(--gray-300);font-style:italic;">* Placeholder profiles. Replace with real members as signups come in.</p>
   </div>
 </section>
+
+
+<!-- ALUMNI MAP -->
+<section style="background:var(--off-white);padding:7rem 0;" id="map">
+  <div style="max-width:1160px;margin:0 auto;padding:0 2.5rem;">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <p class="section-kicker">Where we are</p>
+        <h2 class="section-h2" style="color:var(--black);">Graduates across<br>the country.</h2>
+      </div>
+      <p style="font-size:13px;color:var(--gray-500);max-width:280px;line-height:1.7;text-align:right;">Every dot is a fellow Ave Maria graduate. The map updates as members join.</p>
+    </div>
+    <div class="reveal" style="background:var(--white);border-radius:16px;border:1px solid var(--border-light);overflow:hidden;position:relative;">
+      <div id="map-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--white);z-index:10;border-radius:16px;">
+        <div style="text-align:center;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--green);margin:0 auto 12px;animation:mapPulse 1.5s ease-in-out infinite;"></div>
+          <p style="font-size:12px;color:var(--gray-400);letter-spacing:0.08em;text-transform:uppercase;">Loading map</p>
+        </div>
+      </div>
+      <svg id="us-map" viewBox="0 0 960 600" style="width:100%;display:block;background:var(--white);" xmlns="http://www.w3.org/2000/svg">
+        <!-- US State Paths (simplified) -->
+        <!-- Continental US outline approximation -->
+        <g id="states" fill="#F0EEE8" stroke="#fff" stroke-width="1.5">
+          <!-- Maine --><path d="M856 57 L868 52 L878 68 L872 82 L858 78 Z"/>
+          <!-- Vermont --><path d="M836 65 L848 62 L852 75 L840 80 Z"/>
+          <!-- New Hampshire --><path d="M850 62 L858 58 L862 72 L854 76 Z"/>
+          <!-- Massachusetts --><path d="M830 78 L856 74 L858 86 L836 88 Z"/>
+          <!-- Rhode Island --><path d="M856 82 L863 80 L865 88 L858 90 Z"/>
+          <!-- Connecticut --><path d="M838 86 L856 83 L856 94 L838 95 Z"/>
+          <!-- New York --><path d="M790 60 L840 56 L842 82 L830 90 L806 92 L798 78 Z"/>
+          <!-- New Jersey --><path d="M820 92 L832 90 L836 108 L824 110 Z"/>
+          <!-- Pennsylvania --><path d="M790 80 L834 76 L836 98 L792 102 Z"/>
+          <!-- Delaware --><path d="M832 102 L840 100 L842 112 L834 112 Z"/>
+          <!-- Maryland --><path d="M792 104 L832 100 L834 114 L810 118 L796 112 Z"/>
+          <!-- Virginia --><path d="M780 114 L830 110 L834 128 L810 136 L780 130 Z"/>
+          <!-- West Virginia --><path d="M780 100 L806 98 L810 118 L784 118 Z"/>
+          <!-- North Carolina --><path d="M776 132 L830 128 L834 146 L778 148 Z"/>
+          <!-- South Carolina --><path d="M790 148 L826 144 L828 164 L792 164 Z"/>
+          <!-- Georgia --><path d="M778 160 L826 156 L828 192 L780 192 Z"/>
+          <!-- Florida --><path d="M780 190 L826 188 L832 210 L820 240 L800 260 L784 240 L778 214 Z"/>
+          <!-- Alabama --><path d="M750 162 L782 160 L782 196 L752 196 Z"/>
+          <!-- Mississippi --><path d="M718 162 L752 160 L754 200 L720 200 Z"/>
+          <!-- Tennessee --><path d="M714 138 L780 134 L782 158 L716 160 Z"/>
+          <!-- Kentucky --><path d="M714 116 L782 112 L782 136 L716 140 Z"/>
+          <!-- Ohio --><path d="M754 92 L800 88 L802 118 L756 120 Z"/>
+          <!-- Indiana --><path d="M724 96 L756 92 L758 122 L726 124 Z"/>
+          <!-- Illinois --><path d="M690 98 L726 94 L728 140 L692 142 Z"/>
+          <!-- Michigan UP --><path d="M706 58 L752 54 L754 76 L708 78 Z"/>
+          <!-- Michigan LP --><path d="M734 76 L762 72 L764 100 L736 102 Z"/>
+          <!-- Wisconsin --><path d="M672 62 L710 58 L712 96 L674 98 Z"/>
+          <!-- Minnesota --><path d="M618 38 L672 34 L674 82 L620 84 Z"/>
+          <!-- Iowa --><path d="M626 96 L690 92 L692 124 L628 126 Z"/>
+          <!-- Missouri --><path d="M626 124 L714 120 L716 158 L628 160 Z"/>
+          <!-- Arkansas --><path d="M626 160 L716 156 L718 192 L628 192 Z"/>
+          <!-- Louisiana --><path d="M628 192 L718 188 L722 216 L700 222 L680 218 L660 224 L640 216 L630 208 Z"/>
+          <!-- North Dakota --><path d="M550 34 L618 30 L620 66 L552 68 Z"/>
+          <!-- South Dakota --><path d="M550 66 L620 62 L622 100 L552 102 Z"/>
+          <!-- Nebraska --><path d="M548 100 L626 96 L628 128 L550 130 Z"/>
+          <!-- Kansas --><path d="M546 128 L626 124 L628 162 L548 164 Z"/>
+          <!-- Oklahoma --><path d="M544 162 L626 158 L630 196 L546 196 Z"/>
+          <!-- Texas --><path d="M480 192 L628 186 L634 260 L580 290 L520 286 L480 260 Z"/>
+          <!-- Montana --><path d="M430 28 L552 22 L554 80 L432 84 Z"/>
+          <!-- Wyoming --><path d="M432 82 L552 78 L554 122 L434 126 Z"/>
+          <!-- Colorado --><path d="M432 122 L550 118 L552 162 L434 166 Z"/>
+          <!-- New Mexico --><path d="M430 164 L550 160 L552 210 L432 212 Z"/>
+          <!-- Idaho --><path d="M364 50 L432 44 L434 108 L390 124 L366 108 Z"/>
+          <!-- Utah --><path d="M392 122 L434 118 L436 172 L394 174 Z"/>
+          <!-- Arizona --><path d="M390 170 L434 166 L436 216 L392 218 Z"/>
+          <!-- Nevada --><path d="M320 88 L368 72 L392 108 L394 174 L322 174 Z"/>
+          <!-- Washington --><path d="M302 28 L368 22 L370 68 L304 72 Z"/>
+          <!-- Oregon --><path d="M302 70 L368 64 L370 110 L304 116 Z"/>
+          <!-- California --><path d="M286 108 L322 84 L326 176 L290 196 L282 168 Z"/>
+          <!-- Alaska (inset) --><path d="M80 480 L200 470 L210 540 L140 560 L80 540 Z"/>
+          <!-- Hawaii (inset) --><path d="M260 510 L272 508 L274 518 L262 520 Z M276 514 L290 510 L294 522 L278 524 Z M294 516 L306 514 L308 524 L296 526 Z"/>
+        </g>
+        <!-- Member dots will be injected here -->
+        <g id="member-dots"></g>
+        <!-- Map legend -->
+        <g transform="translate(30,560)">
+          <circle cx="0" cy="0" r="6" fill="#1A6645" opacity="0.8"/>
+          <text x="14" y="4" font-family="DM Sans,sans-serif" font-size="11" fill="#8A8A86">AMAN member</text>
+        </g>
+      </svg>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" style="font-size:13px;color:var(--green);font-weight:500;text-decoration:none;">Add your pin to the map →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes mapPulse{0%,100%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.5);opacity:1;}}
+@keyframes dotAppear{from{opacity:0;transform:scale(0);}to{opacity:0.85;transform:scale(1);}}
+.map-dot{animation:dotAppear 0.4s ease both;}
+.map-dot:hover{opacity:1 !important;cursor:default;}
+</style>
 
 <!-- PILLARS -->
 <section class="section-black pillars-section" id="pillars">
@@ -918,6 +1015,99 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, {threshold: 0.1, rootMargin: '0px 0px -60px 0px'});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+// ===== ALUMNI MAP =====
+// State name to approximate SVG coordinates mapping
+const STATE_COORDS = {
+  "AL":[766,178],"AK":[145,510],"AZ":[412,194],"AR":[672,176],
+  "CA":[300,152],"CO":[491,142],"CT":[847,89],"DE":[836,106],
+  "FL":[803,220],"GA":[803,174],"HI":[278,516],"ID":[398,87],
+  "IL":[709,120],"IN":[740,108],"IA":[658,110],"KS":[597,146],
+  "KY":[748,128],"LA":[673,208],"ME":[862,65],"MD":[813,109],
+  "MA":[843,82],"MI":[748,88],"MN":[645,61],"MS":[736,180],
+  "MO":[671,142],"MT":[491,56],"NE":[589,114],"NV":[357,131],
+  "NH":[854,69],"NJ":[828,101],"NM":[491,187],"NY":[816,74],
+  "NC":[806,140],"ND":[585,52],"OH":[778,104],"OK":[585,179],
+  "OR":[337,90],"PA":[813,89],"RI":[860,86],"SC":[809,156],
+  "SD":[587,84],"TN":[748,148],"TX":[554,239],"UT":[413,148],
+  "VT":[844,68],"VA":[807,122],"WA":[336,50],"WV":[793,109],
+  "WI":[693,79],"WY":[493,104]
+};
+
+// Placeholder member locations — replace with live Google Sheets data
+const MEMBERS = [
+  {state:"FL"},{state:"NY"},{state:"IL"},{state:"TX"},{state:"CA"},
+  {state:"VA"},{state:"PA"},{state:"OH"},{state:"GA"},{state:"FL"},
+];
+
+function renderMap() {
+  const dotsGroup = document.getElementById('member-dots');
+  if (!dotsGroup) return;
+  
+  // Count by state
+  const stateCounts = {};
+  MEMBERS.forEach(m => {
+    stateCounts[m.state] = (stateCounts[m.state] || 0) + 1;
+  });
+
+  // Color states with members
+  document.querySelectorAll('#states path').forEach(path => {
+    // No fill changes — keep clean
+  });
+
+  // Add dots
+  let delay = 0;
+  Object.entries(stateCounts).forEach(([state, count]) => {
+    const coords = STATE_COORDS[state];
+    if (!coords) return;
+    
+    // Pulse ring
+    const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    ring.setAttribute('cx', coords[0]);
+    ring.setAttribute('cy', coords[1]);
+    ring.setAttribute('r', '12');
+    ring.setAttribute('fill','none');
+    ring.setAttribute('stroke','#1A6645');
+    ring.setAttribute('stroke-width','1');
+    ring.setAttribute('opacity','0.25');
+    ring.style.animation = `dotAppear 0.4s ${delay}ms ease both`;
+    dotsGroup.appendChild(ring);
+
+    // Main dot
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', coords[0]);
+    dot.setAttribute('cy', coords[1]);
+    dot.setAttribute('r', count > 1 ? Math.min(8 + count, 14) : 6);
+    dot.setAttribute('fill','#1A6645');
+    dot.setAttribute('opacity','0.85');
+    dot.setAttribute('class','map-dot');
+    dot.style.animationDelay = delay + 'ms';
+    dotsGroup.appendChild(dot);
+
+    // Inner dot
+    const inner = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    inner.setAttribute('cx', coords[0]);
+    inner.setAttribute('cy', coords[1]);
+    inner.setAttribute('r','2.5');
+    inner.setAttribute('fill','#fff');
+    inner.setAttribute('opacity','0.7');
+    inner.style.animation = `dotAppear 0.4s ${delay + 100}ms ease both`;
+    dotsGroup.appendChild(inner);
+
+    delay += 80;
+  });
+
+  // Hide loader
+  setTimeout(() => {
+    const loader = document.getElementById('map-loading');
+    if (loader) loader.style.display = 'none';
+  }, 600);
+}
+
+// Run after page loads
+window.addEventListener('load', () => setTimeout(renderMap, 400));
+
 
 // Member count
 const MEMBER_COUNT = 0;
