@@ -264,6 +264,7 @@ footer{background:var(--black);border-top:1px solid var(--border-dark);padding:3
     <li><a href="#members">Members</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="vision.html">The Vision</a></li>
     <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScZUGcTpg0HwqGscoJRAYa5E4maZMdkGJw9Zz78w0k-VhLp6w/viewform?usp=publish-editor" class="nav-cta">Join now</a></li>
   </ul>
 </nav>
@@ -741,14 +742,8 @@ function animateCount(el, target, duration=1800) {
 // ============================================================
 // DATA — SHEET URL + PROXIES + FALLBACK
 // ============================================================
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRb39V8bQ_thzf8qnVfi5Tb-P0ECIYdGMngXSnjTekhxKopaCnXdK8xEizrNj-_x8EgjlL9cC0rnXq6/pub?gid=1132513376&single=true&output=csv";
-
-// Three proxies tried in order — if all fail, fallback data is used
-const PROXIES = [
-  (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  (url) => `https://thingproxy.freeboard.io/fetch/${url}`,
-];
+// Direct Apps Script URL — no proxies needed, no CORS issues, always live
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQxyRhc7deSBHzK4xar8NvJ0foDRtSgWo5l9eNIvbRez5ee88BlXXktpMCUknkLUIw5w/exec";
 
 // Your 24 real signups as of launch day — always shows something even if fetch fails
 const FALLBACK_MEMBERS = [
@@ -810,19 +805,20 @@ function parseCSV(text) {
   return rows;
 }
 
-async function fetchCSV() {
-  for (const proxyFn of PROXIES) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 7000);
-      const res = await fetch(proxyFn(SHEET_CSV_URL), { signal: controller.signal });
-      clearTimeout(timeout);
-      if (!res.ok) continue;
-      const text = await res.text();
-      if (text && text.length > 100) return text;
-    } catch(e) { /* try next proxy */ }
+// Fetches sheet data directly via Apps Script — returns 2D array of rows
+async function fetchSheetData() {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const res = await fetch(APPS_SCRIPT_URL, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) return data;
+  } catch(e) {
+    console.warn("Apps Script fetch failed, using fallback:", e);
   }
-  return null; // all proxies failed
+  return null;
 }
 
 const STATE_ABBR = {
@@ -851,40 +847,37 @@ const KNOWN_FIELDS = [
 
 function isDataRow(row) {
   if (!row || row.length < 9) return false;
-  const field = row[FIELD_COL] ? row[FIELD_COL].trim().toLowerCase() : "";
+  const field = row[FIELD_COL] ? String(row[FIELD_COL]).trim().toLowerCase() : "";
   if (!field) return false;
   return KNOWN_FIELDS.some(f => field.includes(f.split(" ")[0].toLowerCase()));
 }
 
 async function fetchMembers() {
-  const text = await fetchCSV();
-  if (!text) {
-    console.info("Using fallback member data (all proxies failed or timed out)");
+  const data = await fetchSheetData();
+  if (!data) {
+    console.info("Using fallback member data");
     return FALLBACK_MEMBERS;
   }
-  const rows = parseCSV(text);
   const members = [];
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    if (!isDataRow(row)) continue; // skip header, blank rows, non-data
-    const rawState = row[STATE_COL] ? row[STATE_COL].trim() : "";
-    const field    = row[FIELD_COL] ? row[FIELD_COL].trim() : "Other/Undecided";
-    const city     = row[CITY_COL]  ? row[CITY_COL].trim()  : "";
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    if (!isDataRow(row)) continue;
+    const rawState = row[STATE_COL] ? String(row[STATE_COL]).trim() : "";
+    const field    = row[FIELD_COL] ? String(row[FIELD_COL]).trim() : "Other/Undecided";
+    const city     = row[CITY_COL]  ? String(row[CITY_COL]).trim()  : "";
     if (!rawState) continue;
-    // Accept full state names ("Florida") or abbreviations ("FL")
     let state = STATE_ABBR[rawState.toLowerCase()] || (rawState.length === 2 ? rawState.toUpperCase() : "");
     if (state && state.length === 2) members.push({ state, city, field });
   }
-  console.info(`Loaded ${members.length} members from live sheet`);
+  console.info(`Loaded ${members.length} members from Apps Script`);
   return members.length > 0 ? members : FALLBACK_MEMBERS;
 }
 
 async function updateMemberCount() {
-  const text = await fetchCSV();
+  const data = await fetchSheetData();
   let count = FALLBACK_MEMBERS.length;
-  if (text) {
-    const rows = parseCSV(text);
-    const live = rows.filter(isDataRow).length;
+  if (data) {
+    const live = data.filter(isDataRow).length;
     if (live > 0) count = live;
   }
   const heroEl = document.getElementById('hero-count');
